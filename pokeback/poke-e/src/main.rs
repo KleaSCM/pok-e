@@ -52,4 +52,8 @@ async fn main() -> result<(), Error> {
 
 // now lets save to json
 
+let json = serde_json::to_string_pretty(&pokedex)?;
+let mut file = File::create("pokedex.json")?;
+file.write_all(json.as_bytes())?;
+
 
