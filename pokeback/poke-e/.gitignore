@@ -1,0 +1,20 @@
+# Exclude Makefiles
+Makefile
+makefile
+
+# Exclude build artifacts and temporary files
+target/
+Cargo.lock
+*.rs.bk
+
+# Exclude IDE-specific files
+.idea/
+.vscode/
+*.swp
+
+# Exclude logs and temporary files
+*.log
+*.tmp
+*.DS_Store
+
+# Exclude any other non-code files or directories you don’t want in the repo
