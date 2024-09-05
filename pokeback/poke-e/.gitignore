@@ -18,3 +18,5 @@ Cargo.lock
 *.DS_Store
 
 # Exclude any other non-code files or directories you don’t want in the repo
+# Ignore target directory
+target/
