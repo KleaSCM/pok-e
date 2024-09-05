@@ -1,24 +1,14 @@
-
-
-.pokedex {
-  text-align: center;
-}
-
-.pokemonList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .pokemonCard {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  width: 150px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.pokemonCardImg {
-  width: 100px;
-  height: 100px;
+.pokemonCard.expanded {
+  background-color: #f0f0f0;
+}
+
+.pokemonDetailExpanded {
+  /* Add styling for expanded detail view */
+  padding: 10px;
+  border-top: 1px solid #ddd;
 }

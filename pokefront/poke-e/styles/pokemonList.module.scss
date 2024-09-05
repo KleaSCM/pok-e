@@ -1,0 +1,10 @@
+.pokemonCard {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+.pokemonCard.expanded {
+
+  background-color: #f0f0f0; 
+}
