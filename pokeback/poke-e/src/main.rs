@@ -1,5 +1,6 @@
 use reqwest::Error;
 use serde::{Deserialize, Serialize};
+use std::error::Error as StdError;
 use std::fs::File;
 use std::io::Write;
 
@@ -12,7 +13,7 @@ struct Pokemon {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
+async fn main() -> Result<(), Box<dyn StdError>> {
     // Call the Pokémon API and fetch all the Pokémon
     let response = reqwest::get("https://pokeapi.co/api/v2/pokemon?limit=151")
         .await?
@@ -20,18 +21,18 @@ async fn main() -> Result<(), Error> {
         .await?;
 
     // Extract names and URLs
-    let results = response["results"].as_array().unwrap();
+    let results = response["results"].as_array().ok_or("Failed to get results array")?;
     let mut pokedex = Vec::new();
 
     for (id, pokemon) in results.iter().enumerate() {
-        let name = pokemon["name"].as_str().unwrap().to_string();
-        let url = pokemon["url"].as_str().unwrap().to_string();
+        let name = pokemon["name"].as_str().ok_or("Failed to get name")?.to_string();
+        let url = pokemon["url"].as_str().ok_or("Failed to get URL")?.to_string();
 
         // Fetch Pokémon details
         let detail_response = reqwest::get(&url).await?.json::<serde_json::Value>().await?;
         let sprite = detail_response["sprites"]["front_default"]
             .as_str()
-            .unwrap()
+            .ok_or("Failed to get sprite URL")?
             .to_string();
 
         // Store the data in the Pokedex
